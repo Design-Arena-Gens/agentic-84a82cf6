@@ -1,0 +1,294 @@
+.scene {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 4rem 1.5rem;
+}
+
+.canvas {
+  position: relative;
+  width: min(680px, 100%);
+  aspect-ratio: 4 / 3;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 32px;
+  box-shadow:
+    0 40px 80px rgba(169, 115, 133, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.canvas::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.45), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(255, 214, 227, 0.45), transparent 50%),
+    linear-gradient(135deg, rgba(255, 249, 251, 0.5), rgba(252, 211, 225, 0.3));
+  opacity: 0.9;
+  filter: blur(24px);
+  z-index: -2;
+}
+
+.canvas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 119h120v1H0z' fill='%23edc8d7' fill-opacity='.4'/%3E%3Cpath d='M119 0v120h1V0z' fill='%23edc8d7' fill-opacity='.4'/%3E%3Ccircle fill='%23f1d6df' fill-opacity='.35' cx='60' cy='60' r='1'/%3E%3C/g%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  opacity: 0.4;
+  z-index: -1;
+}
+
+.hand {
+  position: absolute;
+  top: 52%;
+  left: 38%;
+  width: 220px;
+  height: 220px;
+  transform: rotate(-18deg) translate(-50%, -50%);
+  filter: drop-shadow(0 26px 40px rgba(136, 92, 104, 0.34));
+}
+
+.palm {
+  position: absolute;
+  inset: 25% 18%;
+  border-radius: 60% 55% 55% 50%;
+  background: linear-gradient(145deg, #fbe0d0, #f2c4b0 55%, #f0bda5);
+  box-shadow:
+    inset -12px -18px 28px rgba(226, 140, 120, 0.25),
+    inset 18px 22px 30px rgba(255, 255, 255, 0.65);
+}
+
+.thumb {
+  position: absolute;
+  width: 70px;
+  height: 140px;
+  right: -20px;
+  top: 48px;
+  border-radius: 40% 55% 45% 47%;
+  background: linear-gradient(145deg, #f7d0ba, #ecb79d);
+  box-shadow:
+    inset -10px -15px 20px rgba(214, 120, 96, 0.2),
+    inset 12px 20px 26px rgba(255, 231, 222, 0.9);
+}
+
+.finger {
+  position: absolute;
+  width: 52px;
+  height: 165px;
+  background: linear-gradient(160deg, #ffd7c6, #f4bca2);
+  border-radius: 48px;
+  box-shadow:
+    inset -8px -18px 18px rgba(223, 127, 101, 0.18),
+    inset 12px 16px 20px rgba(255, 239, 228, 0.9);
+}
+
+.index {
+  top: -14px;
+  left: 46px;
+  transform: rotate(8deg);
+}
+
+.middle {
+  top: -8px;
+  left: 92px;
+  height: 175px;
+}
+
+.ring {
+  top: 4px;
+  left: 138px;
+  height: 168px;
+}
+
+.pinky {
+  top: 20px;
+  left: 178px;
+  height: 140px;
+}
+
+.card {
+  position: absolute;
+  padding: 24px 28px;
+  border-radius: 24px;
+  backdrop-filter: blur(26px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 30px 60px rgba(130, 90, 112, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
+  display: grid;
+  gap: 16px;
+  min-width: 180px;
+}
+
+.muteCard {
+  top: 18%;
+  right: 12%;
+  transform: rotate(5deg);
+}
+
+.brightnessCard {
+  bottom: 14%;
+  left: 14%;
+  transform: rotate(-7deg);
+  min-width: 220px;
+}
+
+.cardLabel {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(94, 63, 78, 0.75);
+}
+
+.status {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(94, 63, 78, 0.85);
+}
+
+.iconMute {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, rgba(92, 62, 78, 0.95), rgba(140, 98, 121, 0.95));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 16px 24px rgba(125, 90, 110, 0.35);
+}
+
+.iconBody {
+  position: absolute;
+  width: 26px;
+  height: 20px;
+  border-radius: 6px;
+  background: linear-gradient(150deg, #fcebef, #f3d3de);
+  clip-path: polygon(0 22%, 55% 22%, 100% 0, 100% 100%, 55% 78%, 0 78%);
+}
+
+.iconWave {
+  position: absolute;
+  right: 8px;
+  width: 6px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(250, 235, 246, 0.8);
+  transform: rotate(20deg);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.45);
+}
+
+.iconX {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 150, 170, 0.65);
+  box-shadow: inset 0 0 12px rgba(255, 130, 150, 0.45);
+}
+
+.iconX::before,
+.iconX::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 2px;
+  background: rgba(255, 130, 150, 0.9);
+  transform-origin: center;
+}
+
+.iconX::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.iconX::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(200, 150, 165, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 24px;
+  overflow: hidden;
+}
+
+.sliderTrack {
+  position: absolute;
+  height: 6px;
+  inset-inline: 24px;
+  border-radius: 999px;
+  background: rgba(196, 153, 172, 0.28);
+}
+
+.sliderFill {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffc78f, #fff4a8, #ffffff);
+  box-shadow: 0 0 18px rgba(255, 245, 200, 0.9);
+}
+
+.sliderThumb {
+  position: absolute;
+  right: 24px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff2c6, #ffde91);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 10px 16px rgba(231, 176, 80, 0.55);
+}
+
+.sliderGlow {
+  position: absolute;
+  right: 22px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 242, 198, 0.7), transparent 70%);
+  filter: blur(1px);
+}
+
+@media (max-width: 720px) {
+  .canvas {
+    border-radius: 24px;
+  }
+
+  .hand {
+    width: 180px;
+    height: 180px;
+    left: 42%;
+    top: 55%;
+  }
+
+  .card {
+    padding: 20px 22px;
+    gap: 12px;
+  }
+
+  .slider {
+    height: 48px;
+  }
+}
